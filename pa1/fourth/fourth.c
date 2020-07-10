@@ -148,45 +148,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    // printf("\n=== MatrixX === \n");
-    // for (int i = 0; i < rows; i++)
-    // {
-    //     for (int j = 0; j < columns + 1; j++)
-    //     {
-    //         printf("%f\t", matrixX[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
-    // printf("\n=== MatrixY === \n");
-    // for (int i = 0; i < rows; i++)
-    // {
-    //     printf("%f\n", matrixY[i][0]);
-    // }
-
     transposed = transpose(transposed, matrixX, rows, columns + 1);
 
-    // printf("\n=== Tranposed Matrix === \n");
-    // for (int i = 0; i < columns + 1; i++)
-    // {
-    //     for (int j = 0; j < rows; j++)
-    //     {
-    //         printf("%f\t", transposed[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
     multiplied = multiply(multiplied, transposed, matrixX, columns + 1, rows, rows, columns + 1);
-
-    // printf("\n=== Multipled Matrix === \n");
-    // for (int i = 0; i < columns + 1; i++)
-    // {
-    //     for (int j = 0; j < columns + 1; j++)
-    //     {
-    //         printf("%f\t", multiplied[i][j]);
-    //     }
-    //     printf("\n");
-    // }
 
     inversed = inverse(inversed, multiplied, columns + 1);
 
@@ -198,44 +162,20 @@ int main(int argc, char *argv[])
         }
     }
 
-    // printf("\n=== Inverse Matrix === \n");
-    // for (int i = 0; i < columns + 1; i++)
-    // {
-    //     for (int j = 0; j < columns + 1; j++)
-    //     {
-    //         printf("%f\t", inverseEdited[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
     next = multiply(next, inverseEdited, transposed, columns + 1, columns + 1, columns + 1, rows);
 
-    // printf("\n=== Next Matrix === \n");
-    // for (int i = 0; i < columns + 1; i++)
-    // {
-    //     for (int j = 0; j < rows; j++)
-    //     {
-    //         printf("%f\t", next[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
     weight = multiply(weight, next, matrixY, columns + 1, rows, rows, 1);
-
-    // printf("\n=== Weight Matrix ===\n");
-    // for (int i = 0; i < columns + 1; i++)
-    // {
-    //     printf("%f\n", weight[i][0]);
-    // }
-
-    // printf("\n=== Values are === \n");
 
     fp = fopen(argv[2], "r");
 
     int num;
-    double ans;
 
     fscanf(fp, "%d", &num);
+
+    if (fp == NULL)
+        return 0;
+
+    double ans;
 
     for (int i = 0; i < num; i++)
     {
@@ -275,5 +215,6 @@ int main(int argc, char *argv[])
     free(inverseEdited);
     free(next);
     free(weight);
+
     return 0;
 }
