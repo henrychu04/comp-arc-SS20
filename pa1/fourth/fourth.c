@@ -16,17 +16,14 @@ double **transpose(double **transposed, double **matrix, int rows, int columns)
 
 double **multiply(double **multiplied, double **matrix1, double **matrix2, int rows1, int columns1, int rows2, int columns2)
 {
-    int columnCount = 0;
     for (int i = 0; i < rows1; i++)
     {
         for (int j = 0; j < columns2; j++)
         {
             double adding = 0;
-            columnCount = 0;
             for (int k = 0; k < rows2; k++)
             {
-                adding += matrix1[i][columnCount] * matrix2[k][j];
-                columnCount++;
+                adding += matrix1[i][k] * matrix2[k][j];
             }
             multiplied[i][j] = adding;
         }
